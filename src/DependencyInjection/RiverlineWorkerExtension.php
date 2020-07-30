@@ -36,10 +36,10 @@ class RiverlineWorkerExtension extends Extension
             foreach ($config['queues'] as $id => $queue) {
                 $container->setDefinition(
                     $this->getAlias().'.queue.'.$id,
-                    new Definition('Riverline\WorkerBundle\Queue\Queue', array(
+                    (new Definition('Riverline\WorkerBundle\Queue\Queue', array(
                         $queue['name'],
                         new Reference($this->getAlias().'.provider.'.$queue['provider'])
-                    ))
+                    )))->setPublic(true)
                 );
             }
         }
